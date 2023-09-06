@@ -1,0 +1,203 @@
+<Window
+    x:Class="Crafty.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:app="clr-namespace:Crafty"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:rxui="http://reactiveui.net"
+    xmlns:vm="using:Crafty.ViewModels"
+    Title="{Binding Title}"
+    Width="850"
+    Height="500"
+    MinWidth="850"
+    MinHeight="500"
+    Background="#141414"
+    Icon="/Assets/iconChe.ico"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Row="0">
+            <ProgressBar
+                Name="ProgressBar"
+                Grid.Row="0"
+                VerticalAlignment="Stretch"
+                Background="#141414"
+                CornerRadius="0"
+                FontSize="24"
+                Foreground="#3b963b"
+                Maximum="{Binding ProgressBarMaximum}"
+                ProgressTextFormat="{Binding ProgressBarText}"
+                ShowProgressText="True"
+                Value="{Binding ProgressBarValue}" />
+
+            <Button
+                Grid.Row="0"
+                Margin="10"
+                VerticalAlignment="Stretch"
+                Background="Transparent"
+                Command="{Binding NavigateBackCommand}"
+                CornerRadius="4">
+                <Image Height="16" Source="/Assets/back.png" />
+            </Button>
+        </Grid>
+
+        <rxui:RoutedViewHost Grid.Row="1" Router="{Binding Router}">
+            <rxui:RoutedViewHost.DefaultContent>
+                <Grid>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="120" />
+                        </Grid.RowDefinitions>
+
+                        <Image
+                            Name="Cover"
+                            Grid.Row="0"
+                            Source="{Binding Cover^}"
+                            Stretch="UniformToFill" />
+
+                        <Grid Grid.Row="1" Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                          <Grid
+                            Grid.Column="1"
+                            ColumnDefinitions="72"
+                            RowDefinitions="Auto, Auto"
+                            Margin="0"
+                            >
+                            <Button                          
+                               Margin="5,0,10,10"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Stretch"
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               Background="#141414"
+                               Command="{Binding NavigateSettingsCommand}"
+                               CornerRadius="4">
+                              <Image
+                                  Height="32"
+                                  Source="/Assets/settings.png"
+                                  Stretch="UniformToFill" />
+                            </Button>
+                            <Button
+                               Margin="5,0,10,10"
+                               Name="UpdateLauncherButton"
+                               Grid.Row="1"
+                               HorizontalAlignment="Left"
+                               Grid.Column="0"
+                               VerticalAlignment="Stretch"
+                               Background="#141414"
+                               Click="UpdateLauncher"
+                               CornerRadius="4">
+                              <Image
+                                  Height="40"
+                                  Source="/Assets/mod_browser.png"
+                                  Stretch="UniformToFill" />
+                            </Button>
+                          </Grid>
+
+
+                          <Grid 
+                            Grid.Column="4"
+                            ColumnDefinitions="200,1*,2*"
+                            RowDefinitions="75,1*,2*"
+                            Margin="4">
+                            <TextBox
+                                Name="Username"
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Width="200"
+                                Margin="0,10,10,10"
+                                VerticalAlignment="Stretch"
+                                FontSize="24"
+                                IsEnabled="{Binding !IsLoggedIn}"
+                                MaxLength="16"
+                                Text="{Binding Username}"
+                                Watermark="Username" />
+                            <CheckBox 
+                              Name="SaveUsernameCheck"
+                              IsChecked="{Binding SaveUsername}"
+                              Grid.Row="1"
+                              Grid.Column="0">Save username.
+                            </CheckBox>
+                          </Grid>
+
+                            
+
+                            <ComboBox
+                                Name="VersionList"
+                                Grid.Column="5"
+                                Width="200"
+                                Margin="0,10,10,10"
+                                VerticalAlignment="Stretch"
+                                ItemsSource="{Binding VersionList}"
+                                MaxDropDownHeight="300"
+                                PlaceholderForeground="Gray"
+                                PlaceholderText="Version"
+                                SelectedItem="{Binding SelectedItem}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
+                            <Button
+                                Name="PlayButton"
+                                Grid.Column="6"
+                                Width="75"
+                                Margin="10"
+                                VerticalAlignment="Stretch"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Background="#3b963b"
+                                Click="PlayClicked"
+                                CornerRadius="4"
+                                FontSize="24">
+                                Play
+                            </Button>
+                          <Button
+                                Name="Download_and_play"
+                                Grid.Column="7"
+                                Width="200"
+                                Margin="10"
+                                VerticalAlignment="Stretch"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Background="#3b963b"
+                                Click="RepairClicked"
+                                CornerRadius="4"
+                                FontSize="18">
+                            Download and play
+                          </Button>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </rxui:RoutedViewHost.DefaultContent>
+
+            <rxui:RoutedViewHost.ViewLocator>
+                <app:AppViewLocator />
+            </rxui:RoutedViewHost.ViewLocator>
+        </rxui:RoutedViewHost>
+    </Grid>
+</Window>

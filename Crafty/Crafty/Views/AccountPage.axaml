@@ -1,0 +1,55 @@
+<UserControl
+    x:Class="Crafty.Views.AccountPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid>
+        <TextBlock
+            Name="LoggingIn"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="24"
+            Text="Logging in..." />
+
+        <StackPanel
+            Name="LoggedInPanel"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsVisible="False"
+            Orientation="Horizontal">
+            <Image
+                Name="Skin"
+                Height="256"
+                Margin="20"
+                HorizontalAlignment="Right"
+                Source="{Binding Skin^}" />
+
+            <StackPanel
+                Name="LoginInfoPanel"
+                Margin="20"
+                VerticalAlignment="Center"
+                Orientation="Vertical">
+                <TextBox
+                    Name="Username"
+                    Width="300"
+                    Margin="0,5"
+                    HorizontalAlignment="Left"
+                    FontSize="24"
+                    IsEnabled="False"
+                    Watermark="Username" />
+
+                <Button
+                    Name="Logout"
+                    Width="300"
+                    Margin="0,5"
+                    HorizontalAlignment="Left"
+                    HorizontalContentAlignment="Center"
+                    Background="#8a1a1a"
+                    Command="{Binding LogoutCommand}"
+                    FontSize="24">
+                    Logout
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

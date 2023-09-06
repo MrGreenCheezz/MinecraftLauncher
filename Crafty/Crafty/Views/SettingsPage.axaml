@@ -1,0 +1,70 @@
+<UserControl
+    x:Class="Crafty.Views.SettingsPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer>
+        <StackPanel Orientation="Vertical">
+            <TextBlock
+                HorizontalAlignment="Center"
+                FontWeight="Bold"
+                Text="Minecraft" />
+
+            <Grid Margin="10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    Name="RamText"
+                    Grid.Column="0"
+                    Width="80"
+                    Margin="10,0"
+                    VerticalAlignment="Center"
+                    Text="RAM Usage" />
+
+                <Slider
+                    Name="RamSlider"
+                    Grid.Column="1"
+                    Margin="10,0"
+                    Focusable="False"
+                    IsSnapToTickEnabled="True"
+                    LargeChange="0"
+                    PointerExited="RamSlider_OnPointerExited"
+                    PointerMoved="RamSlider_OnPointerMoved"
+                    TickFrequency="1024"
+                    TickPlacement="BottomRight" />           
+            </Grid>
+          <Grid Margin="10,0">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock
+                   Name="JavaPathText"
+                   Grid.Column="1"
+                   Width="90"
+                   HorizontalAlignment="Left"
+                   Margin="10,0"
+                   VerticalAlignment="Center"
+                   Text="Path to java" />
+            <TextBox
+                  Name="JavaPath"
+                  Grid.Column="1"
+                  Width="600"
+                  Margin="10,0"
+                  VerticalAlignment="Stretch"
+                  FontSize="18"
+                  MaxLength="200"
+                  Text="{Binding JavaPathValue}"
+                  Watermark="Path..." />
+          </Grid>
+         
+
+            <Separator Margin="10" />
+
+           
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
